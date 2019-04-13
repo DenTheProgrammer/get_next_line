@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdebbi <mdebbi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: den <den@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:25:48 by mdebbi            #+#    #+#             */
-/*   Updated: 2019/04/13 22:28:20 by mdebbi           ###   ########.fr       */
+/*   Updated: 2019/04/14 01:03:59 by den              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ int		has_eol(char *str)
 		if (*str++ == '\n')
 			return (1);
 	return (0);
+}
+
+char *ft_strjoinfree(const char *s1, const char *s2)
+{
+	char *ret;
+	
+	ret = ft_strjoin(s1, s2);
+	free((void*)s1);
+	return (ret);
 }
 
 void	shift(char **storage, size_t len)
@@ -53,7 +62,7 @@ int		check_storage(char **storage, int fd)
 					buf[symb + 1] = '\0';
 				}
 			}
-			*storage = ft_strjoin(*storage, buf);
+			*storage = ft_strjoinfree(*storage, buf);
 			if (has_eol(buf) || symb == 0)
 				break ;
 		}
@@ -62,11 +71,11 @@ int		check_storage(char **storage, int fd)
 
 int		get_next_line(const int fd, char **line)
 {
-	static char	*storage[12000];
+	static char	*storage[MAX_FD];
 	size_t		len;
 	int			check;
 
-	if (fd < 0 || BUFF_SIZE < 0)
+	if (fd < 0 || fd > MAX_FD || BUFF_SIZE < 0)
 		return (-1);
 	check = check_storage(&storage[fd], fd);
 	if (check < 1)
