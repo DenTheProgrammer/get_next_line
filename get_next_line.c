@@ -6,7 +6,7 @@
 /*   By: den <den@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:25:48 by mdebbi            #+#    #+#             */
-/*   Updated: 2019/04/14 01:03:59 by den              ###   ########.fr       */
+/*   Updated: 2019/04/14 15:39:25 by den              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		get_next_line(const int fd, char **line)
 	size_t		len;
 	int			check;
 
-	if (fd < 0 || fd > MAX_FD || BUFF_SIZE < 0)
+	if (fd < 0 || fd > MAX_FD || BUFF_SIZE < 1)
 		return (-1);
 	check = check_storage(&storage[fd], fd);
 	if (check < 1)
