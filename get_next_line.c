@@ -6,7 +6,7 @@
 /*   By: den <den@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:25:48 by mdebbi            #+#    #+#             */
-/*   Updated: 2019/04/14 15:39:25 by den              ###   ########.fr       */
+/*   Updated: 2019/04/15 03:39:19 by den              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int		get_next_line(const int fd, char **line)
 	if (check < 1)
 		return (check);
 	len = ft_strchr(storage[fd], '\n') - storage[fd];
+	free(*line);
 	*line = ft_strnew(len);
 	ft_strncpy(*line, storage[fd], len);
 	shift(&storage[fd], len);
