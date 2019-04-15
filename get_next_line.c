@@ -6,7 +6,7 @@
 /*   By: den <den@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:25:48 by mdebbi            #+#    #+#             */
-/*   Updated: 2019/04/15 03:39:19 by den              ###   ########.fr       */
+/*   Updated: 2019/04/15 19:47:52 by den              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,16 @@ int		check_storage(char **storage, int fd)
 			if (symb < BUFF_SIZE)
 			{
 				if (symb < 0 || (symb == 0 && *storage[0] == '\0'))
-					return (symb < 0 ? -1 : 0);
-				if (buf[symb - 1] != '\n')
 				{
-					buf[symb] = '\n';
-					buf[symb + 1] = '\0';
+					free(*storage);
+					return (symb < 0 ? -1 : 0);
 				}
+				if (buf[symb - 1] != '\n')
+					ft_strncpy(buf + symb, "\n\0", 2);
+				// {
+				// 	buf[symb] = '\n';
+				// 	buf[symb + 1] = '\0';
+				// }
 			}
 			*storage = ft_strjoinfree(*storage, buf);
 			if (has_eol(buf) || symb == 0)
